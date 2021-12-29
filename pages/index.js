@@ -24,7 +24,8 @@ const Home = () => {
     var yyyy = today.getFullYear();
     var mmName = today.toLocaleString('default', { month: 'long' });
 
-    setToday(dd + '-' + mmName + '-' + yyyy + ' at ' + makeTimeString(today))
+//    setToday(dd + '-' + mmName + '-' + yyyy + ' at ' + makeTimeString(today))
+    setToday(dd + '-' + mmName + '-' + yyyy )
 
   }
 
@@ -32,22 +33,36 @@ const Home = () => {
   const makeTimeString = (d) => {
 
     var hr = d.getHours()
+    var min = d.getMinutes()
+    var sec = d.getSeconds()
+
+    // if (sec >= 30 ) {
+    //   min += 1
+    //   if (min === 60) {
+    //     hr += 1
+    //     min = 0
+    //   }
+    //   // not handling midnight as sunset sunrise can never be midnight
+    // }
+
+
     var ampm = hr > 12 ? "pm" : "am"
     if (hr > 12) hr -= 12
 
-    var min = String(d.getMinutes()).padStart(2, 0)
-    var sec = String(d.getSeconds()).padStart(2, 0)
 
-    return (hr + ":" + min + ":" + sec + " " + ampm)
+    return (String(hr).padStart(2,0) + ":" + String(min).padStart(2,0) + " " + ampm)
   }
 
 
 
 
   return (
-    <div>
+    <div className=''>
 
-      <div className="flex bg-gray-100 rounded shadow p-6 m-2 text-lg">Today is {today}</div>
+      <div className="flex flex-col bg-black text-white rounded  p-6  ">
+      <div className="text-lg">Sunrise & Sunset</div>
+      <div className=" text">  {today}</div>
+      </div>
 
 
       {cities.map((x) => (
